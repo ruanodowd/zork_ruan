@@ -10,7 +10,8 @@ SOURCES += \
         ZorkUL.cpp \
         item.cpp \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+        output.cpp
 
 resources.files = main.qml 
 resources.prefix = /$${TARGET}
@@ -38,7 +39,8 @@ HEADERS += \
     Room.h \
     ZorkUL.h \
     item.h \
-    mainwindow.h
+    mainwindow.h \
+    output.h
 
 DISTFILES += \
     CMakeLists.txt

@@ -19,11 +19,15 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+signals:
+    void textUpdated(int counter);
 private slots:
     void on_lineEdit_returnPressed();
+    void changeText();
 
 private:
     Ui::MainWindow *ui;
     ZorkUL zorkUL;
+    int counter;
 };
 #endif // MAINWINDOW_H
