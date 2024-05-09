@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include "ZorkUL.h"
-
+#include "Command.h"
 #include <QMainWindow>
 
 QT_BEGIN_NAMESPACE
