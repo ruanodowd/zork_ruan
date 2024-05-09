@@ -6,14 +6,12 @@ using std::string;
 
 Output::Output() {
     vector<string> stringVector({});
-    stringVector.push_back("Welcome to Zork");
-    stringVector.push_back("Type a command in to enter");
 }
 void Output::takeInput(string s){
     stringVector.push_back(s);
 }
 string Output::lastString() {
-    return stringVector[stringVector.size()];
+    return stringVector[stringVector.size()-1];
 }
 string Output::toString(){
     string r;

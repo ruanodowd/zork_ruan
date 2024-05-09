@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include <output.h>
 using namespace std;
 #include "ZorkUL.h"
 
@@ -82,7 +82,13 @@ bool ZorkUL::update(std::string buffer) {
     return finished;
 }
 
+string ZorkUL::getLastOutput() {
+    return output.toString();
+}
+
 void ZorkUL::printWelcome() {
+    output.takeInput("Welcome to Mia's Adventure");
+    output.takeInput("info for help");
 	cout << "start"<< endl;
 	cout << "info for help"<< endl;
 	cout << endl;
@@ -96,6 +102,7 @@ void ZorkUL::printWelcome() {
  */
 bool ZorkUL::processCommand(Command command) {
 	if (command.isUnknown()) {
+        output.takeInput("What???");
 		cout << "invalid input"<< endl;
 		return false;
 	}

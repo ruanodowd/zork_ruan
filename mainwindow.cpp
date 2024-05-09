@@ -22,10 +22,16 @@ void MainWindow::changeText()
     ui->label20->setText(s);
 }
 
+void MainWindow::changeLogText(string fullLog){
+    QString s = QString::fromStdString(fullLog);
+    ui->log->setText(s);
+}
+
 void MainWindow::on_lineEdit_returnPressed()
 {
     bool finished = zorkUL.update(ui->lineEdit->text().toStdString());
     changeText();
+    changeLogText(zorkUL.getLastOutput());
     if (finished)
         QCoreApplication::quit();
 
