@@ -2,6 +2,7 @@
 #include "./ui_mainwindow.h"
 #include <string>
 
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -32,6 +33,10 @@ void MainWindow::on_lineEdit_returnPressed()
     bool finished = zorkUL.update(ui->lineEdit->text().toStdString());
     changeText();
     changeLogText(zorkUL.getLastOutput());
+    //ui->log->verticalScrollBar()->
+
+
+
     if (finished)
         QCoreApplication::quit();
 

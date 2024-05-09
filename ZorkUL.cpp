@@ -87,12 +87,14 @@ string ZorkUL::getLastOutput() {
 }
 
 void ZorkUL::printWelcome() {
-    output.takeInput("Welcome to Mia's Adventure");
-    output.takeInput("info for help");
+    output.takeInput("Welcome to Mia's Adventure\n"
+                     "click info for help\n"
+                     + currentRoom->longDescription());
 	cout << "start"<< endl;
 	cout << "info for help"<< endl;
 	cout << endl;
 	cout << currentRoom->longDescription() << endl;
+
 }
 
 /**
