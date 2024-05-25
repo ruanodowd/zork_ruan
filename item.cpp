@@ -1,5 +1,5 @@
 #include "item.h"
-
+#include "output.h"
 Item::Item (string inDescription, int inWeightGrams, float inValue/**, int weaponCheck*/) {
 	description = inDescription;
 	setWeight(inWeightGrams);
@@ -14,7 +14,8 @@ Item::Item(string inDescription) {
 void Item::setWeight(int inWeightGrams)
 {
     if (inWeightGrams > 9999 || inWeightGrams < 0)
-       cout << "weight invalid, must be 0<weight<9999" ;
+        cout << "";
+        //output.takeInput("weight invalid, must be 0<weight<9999") ;
     else
 	   weightGrams = inWeightGrams;
 }
@@ -22,7 +23,8 @@ void Item::setWeight(int inWeightGrams)
 void Item::setValue(float inValue)
 {
     if (inValue > 9999 || inValue < 0)
-       cout << "value invalid, must be 0<value<9999" ;
+        //output.takeInput("value invalid, must be 0<value<9999") ;
+        cout << "";
     else
 	   value = inValue;
 }
@@ -30,9 +32,9 @@ void Item::setValue(float inValue)
 /**void Item::setWeaponCheck(int isWeapon)
 {
     if(isWeapon > 0 || isWeapon < 0)
-        cout << "Item not a weapon" ;
+        output.takeInput("Item not a weapon") ;
     else
-        cout << "Item is a weapon" ;
+        output.takeInput("Item is a weapon") ;
 }*/
 
 string Item::getShortDescription()

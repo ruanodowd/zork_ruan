@@ -1,5 +1,5 @@
 #include "CommandWords.h"
-
+#include "output.h"
 vector<string> CommandWords::validCommands;
 
 /**
@@ -38,7 +38,6 @@ void CommandWords::showAll() {
 	//Loops through validCommands and prints each to the screen.
 	for (unsigned int i = 0; i < validCommands.size(); i++)
 	{
-		cout << validCommands[i]<< "  ";
+        //output.takeInput(validCommands[i]+ "  ");
 	}
-	cout << endl;
 }

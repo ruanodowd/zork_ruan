@@ -17,7 +17,7 @@ ZorkUL::ZorkUL() {
 void ZorkUL::createRooms()  {
 	Room *a, *b, *c, *d, *e, *f, *g, *h, *i;
 
-	a = new Room("a");
+    a = new Room("a");
         a->addItem(new Item("x", 1, 11));
         a->addItem(new Item("y", 2, 22));
 	b = new Room("b");
@@ -65,8 +65,7 @@ void ZorkUL::play() {
 		//   with ("return new Command(...)")
 		delete command;
 	}
-	cout << endl;
-	cout << "end" << endl;
+    output.takeInput("end");
 }
 */
 
@@ -90,10 +89,6 @@ void ZorkUL::printWelcome() {
     output.takeInput("Welcome to Mia's Adventure\n"
                      "click info for help\n"
                      + currentRoom->longDescription());
-	cout << "start"<< endl;
-	cout << "info for help"<< endl;
-	cout << endl;
-	cout << currentRoom->longDescription() << endl;
 
 }
 
@@ -105,7 +100,6 @@ void ZorkUL::printWelcome() {
 bool ZorkUL::processCommand(Command command) {
 	if (command.isUnknown()) {
         output.takeInput("What???");
-		cout << "invalid input"<< endl;
 		return false;
 	}
 
@@ -115,13 +109,13 @@ bool ZorkUL::processCommand(Command command) {
 
 	else if (commandWord.compare("map") == 0)
 		{
-        cout << "[h] --- [f] --- [g]" << endl;
-		cout << "         |         " << endl;
-        cout << "         |         " << endl;
-		cout << "[c] --- [a] --- [b]" << endl;
-		cout << "         |         " << endl;
-		cout << "         |         " << endl;
-		cout << "[i] --- [d] --- [e]" << endl;
+        output.takeInput("[h] --- [f] --- [g]\n"
+                        "         |         \n"
+                        "         |         \n"
+                        "[c] --- [a] --- [b]\n"
+                        "         |         \n"
+                        "         |         \n"
+                        "[i] --- [d] --- [e]\n");
 		}
 
 	else if (commandWord.compare("go") == 0)
@@ -130,19 +124,19 @@ bool ZorkUL::processCommand(Command command) {
     else if (commandWord.compare("take") == 0)
     {
        	if (!command.hasSecondWord()) {
-		cout << "incomplete input"<< endl;
+            output.takeInput("incomplete input");
         }
         else
          if (command.hasSecondWord()) {
-        cout << "you're trying to take " + command.getSecondWord() << endl;
+            output.takeInput("you're trying to take " + command.getSecondWord());
+
         int location = currentRoom->isItemInRoom(command.getSecondWord());
         if (location  < 0 )
-            cout << "item is not in room" << endl;
+            output.takeInput("item is not in room");
         else
-            cout << "item is in room" << endl;
-            cout << "index number " << + location << endl;
-            cout << endl;
-            cout << currentRoom->longDescription() << endl;
+            output.takeInput("item is in room");
+            output.takeInput("index number " + location);
+            output.takeInput(currentRoom->longDescription());
         }
     }
 
@@ -153,18 +147,18 @@ bool ZorkUL::processCommand(Command command) {
     /*
     {
     if (!command.hasSecondWord()) {
-		cout << "incomplete input"<< endl;
+        output.takeInput("incomplete input");
         }
         else
             if (command.hasSecondWord()) {
-            cout << "you're adding " + command.getSecondWord() << endl;
+            output.takeInput("you're adding " + command.getSecondWord());
             itemsInRoom.push_Back;
         }
     }
 */
     else if (commandWord.compare("quit") == 0) {
 		if (command.hasSecondWord())
-			cout << "overdefined input"<< endl;
+            output.takeInput("overdefined input");
 		else
 			return true; /**signal to quit*/
 	}
@@ -172,14 +166,14 @@ bool ZorkUL::processCommand(Command command) {
 }
 /** COMMANDS **/
 void ZorkUL::printHelp() {
-	cout << "valid inputs are; " << endl;
+    output.takeInput("valid inputs are; ");
 	parser.showCommands();
 
 }
 
 void ZorkUL::goRoom(Command command) {
 	if (!command.hasSecondWord()) {
-		cout << "incomplete input"<< endl;
+        output.takeInput("incomplete input");
 		return;
 	}
 
@@ -189,10 +183,10 @@ void ZorkUL::goRoom(Command command) {
 	Room* nextRoom = currentRoom->nextRoom(direction);
 
 	if (nextRoom == NULL)
-		cout << "underdefined input"<< endl;
+        output.takeInput("underdefined input");
 	else {
 		currentRoom = nextRoom;
-		cout << currentRoom->longDescription() << endl;
+        output.takeInput(currentRoom->longDescription());
 	}
 }
 

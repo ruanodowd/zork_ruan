@@ -8,6 +8,7 @@ SOURCES += \
         Parser.cpp \
         Room.cpp \
         ZorkUL.cpp \
+        graphnode.cpp \
         item.cpp \
         main.cpp \
         mainwindow.cpp \
@@ -38,6 +39,7 @@ HEADERS += \
     Parser.h \
     Room.h \
     ZorkUL.h \
+    graphnode.h \
     item.h \
     mainwindow.h \
     output.h

@@ -18,5 +18,8 @@ string Output::toString(){
     for (string s:stringVector){
         r = r + "\n" + s;
     }
+    for (auto it = stringVector.rbegin(); it != stringVector.rend(); ++it) {
+        cout << *it << " ";
+    }
     return r;
 }
