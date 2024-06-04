@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
 #include <string>
-
+#include <QScrollBar>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -33,7 +33,9 @@ void MainWindow::on_lineEdit_returnPressed()
     bool finished = zorkUL.update(ui->lineEdit->text().toStdString());
     changeText();
     changeLogText(zorkUL.getLastOutput());
-    //ui->log->verticalScrollBar()->
+    QScrollBar *scrollBar = ui->log->verticalScrollBar();
+    scrollBar->setValue(scrollBar->maximum());
+
 
 
 

@@ -45,4 +45,5 @@ HEADERS += \
     output.h
 
 DISTFILES += \
-    CMakeLists.txt
+    CMakeLists.txt \
+    img/CRT_Scanlines.png

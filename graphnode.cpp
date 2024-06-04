@@ -1,4 +1,4 @@
-#include "GraphNode.h"
+#include "graphnode.h"
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonArray>
@@ -96,21 +96,6 @@ QJsonObject GraphNode::toJSON() const {
     return jsonObj;
 }
 
-std::ostream& operator<<(std::ostream& os, const GraphNode& node) {
-    os << "GraphNode ID: " << node.id.toStdString() << "\nData: ";
-    if (node.data.strValue) {
-        os << node.data.strValue->toStdString();
-    } else {
-        os << "null";
-    }
-    os << "\nEdges: ";
-    for (const auto& edge : node.edges) {
-        os << edge->id.toStdString() << " ";
-    }
-    os << std::endl;
-    return os;
-}
-
 void GraphNode::copyData(const GraphNode& other) {
     if (other.data.strValue) {
         data.strValue = new QString(*other.data.strValue);
@@ -122,5 +107,31 @@ void GraphNode::copyData(const GraphNode& other) {
 // Template specialization for GraphNode
 template<>
 std::shared_ptr<GraphNode> JSONParser<GraphNode>::parse(const QJsonObject& jsonObj) {
-    auto node = std::make
+    auto node = std::make_shared<GraphNode>();
+    node->fromJSON(jsonObj);
+    return node;
+}
+
+template<typename T>
+std::shared_ptr<T> JSONParser<T>::parse(const QJsonObject& jsonObj) {
+    static_assert(sizeof(T) == 0, "Template specialization not provided for this type");
+}
+
+// Define the operator<< outside the class definition, but in the same namespace
+namespace GraphParser {
+std::ostream& operator<<(std::ostream& os, const GraphNode& node) {
+    os << "GraphNode ID: " << node.id.toStdString() << "\nData: ";
+    if (node.data.strValue) {
+        os << node.data.strValue->toStdString();
+    } else {
+        os << "null";
+    }
+    os << "\nEdges: ";
+    for (const auto& edge : node.edges) {
+        os << edge->getId().toStdString() << " ";
+    }
+    os << std::endl;
+    return os;
+}
+}
 

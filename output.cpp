@@ -16,7 +16,7 @@ string Output::lastString() {
 string Output::toString(){
     string r;
     for (string s:stringVector){
-        r = r + "\n" + s;
+        r = r + "\n\n" + s;
     }
     for (auto it = stringVector.rbegin(); it != stringVector.rend(); ++it) {
         cout << *it << " ";

@@ -16,6 +16,13 @@ namespace GraphParser {
 // Forward declarations
 class GraphNode;
 
+// Template declaration
+template<typename T>
+class JSONParser {
+public:
+    static std::shared_ptr<T> parse(const QJsonObject& jsonObj);
+};
+
 // Custom exception class
 class ParseException : public std::exception {
 public:
@@ -31,8 +38,12 @@ union NodeData {
     bool boolValue;
     QString* strValue;
 
-    NodeData() : intValue(0) {}
-    ~NodeData() {}
+    NodeData() : intValue(0), strValue(nullptr) {}
+    ~NodeData() {
+        if (strValue) {
+            delete strValue;
+        }
+    }
 };
 
 // Abstract base class
@@ -45,7 +56,9 @@ public:
 
 class GraphNode : public JSONSerializable {
 public:
-    GraphNode(const QString& id = "") : id(id), data(), edges() {}
+    GraphNode(const QString& id = "") : id(id), edges() {
+        data.strValue = nullptr;
+    }
 
     GraphNode(const GraphNode& other); // Copy constructor
     GraphNode& operator=(const GraphNode& other); // Assignment operator
@@ -62,22 +75,13 @@ public:
     void fromJSON(const QJsonObject& jsonObj) override;
     QJsonObject toJSON() const override;
 
-    // Friend declaration
     friend std::ostream& operator<<(std::ostream& os, const GraphNode& node);
 
 protected:
     QString id;
     NodeData data;
     QVector<std::shared_ptr<GraphNode>> edges;
-
     void copyData(const GraphNode& other);
-};
-
-// Template declaration
-template<typename T>
-class JSONParser {
-public:
-    static T parse(const QJsonObject& jsonObj);
 };
 
 // Template specialization for GraphNode
