@@ -9,19 +9,13 @@
 #include <memory>
 #include <exception>
 #include <iostream>
-#include <bitset>
 
 namespace GraphParser {
 
 // Forward declarations
 class GraphNode;
 
-// Template declaration
-template<typename T>
-class JSONParser {
-public:
-    static std::shared_ptr<T> parse(const QJsonObject& jsonObj);
-};
+
 
 // Custom exception class
 class ParseException : public std::exception {
@@ -38,7 +32,7 @@ union NodeData {
     bool boolValue;
     QString* strValue;
 
-    NodeData() : intValue(0), strValue(nullptr) {}
+    NodeData() : strValue(nullptr) {}
     ~NodeData() {
         if (strValue) {
             delete strValue;
@@ -46,9 +40,10 @@ union NodeData {
     }
 };
 
-// Abstract base class
+// abstract base class
 class JSONSerializable {
 public:
+    //virtual functions
     virtual void fromJSON(const QJsonObject& jsonObj) = 0;
     virtual QJsonObject toJSON() const = 0;
     virtual ~JSONSerializable() = default;
@@ -83,14 +78,20 @@ protected:
     QVector<std::shared_ptr<GraphNode>> edges;
     void copyData(const GraphNode& other);
 };
+//templates
+// declaration
+// template<typename T>
+// class JSONParser {
+// public:
+//     static std::shared_ptr<T> parse(const QJsonObject& jsonObj);
+// };
 
-// Template specialization for GraphNode
-template<>
-class JSONParser<GraphNode> {
-public:
-    static std::shared_ptr<GraphNode> parse(const QJsonObject& jsonObj);
-};
-
+// specialization
+// template<>
+// class JSONParser<GraphNode> {
+// public:
+//     static std::shared_ptr<GraphNode> parse(const QJsonObject& jsonObj);
+// };
 } // namespace GraphParser
 
 #endif // GRAPHNODE_H

@@ -14,6 +14,7 @@ private:
 	string description;
 	map<string, Room*> exits;
 	string exitString();
+    //array?
     vector <Item> itemsInRoom;
 
 

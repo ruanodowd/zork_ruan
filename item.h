@@ -12,10 +12,11 @@ private:
 	string longDescription;
 	int weightGrams;
 	float value;
-	bool weaponCheck;
+    bool ticketBool;
 
 public:
     Item (string description, int inWeight, float inValue);
+    Item (string inDescription, int inWeightGrams, float inValue, int isTicket);
     Item (string description);
 	string getShortDescription();
     string getLongDescription();

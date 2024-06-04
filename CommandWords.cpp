@@ -36,8 +36,10 @@ bool CommandWords::isCommand(string aString) {
  */
 void CommandWords::showAll() {
 	//Loops through validCommands and prints each to the screen.
-	for (unsigned int i = 0; i < validCommands.size(); i++)
-	{
-        //output.takeInput(validCommands[i]+ "  ");
-	}
+ //    string s = "";
+ //    for (unsigned int i = 0; i < validCommands.size(); i++)
+ //    {
+ //        s = s + validCommands[i] + "\n";
+    // }
+ //    output.takeInput(s);
 }

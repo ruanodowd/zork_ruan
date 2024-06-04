@@ -3,6 +3,7 @@
 #include <QJsonObject>
 #include <QJsonArray>
 #include <stdexcept>
+#include <iostream>
 
 using namespace GraphParser;
 
@@ -29,6 +30,7 @@ GraphNode& GraphNode::operator=(const GraphNode& other) {
 GraphNode::~GraphNode() {
     if (data.strValue) {
         delete data.strValue;
+        data.strValue = nullptr;
     }
 }
 
@@ -39,6 +41,7 @@ void GraphNode::addEdge(std::shared_ptr<GraphNode> node) {
 void GraphNode::setData(const NodeData& newData) {
     if (data.strValue) {
         delete data.strValue;
+        data.strValue = nullptr;
     }
     data = newData;
 }
@@ -72,8 +75,8 @@ void GraphNode::fromJSON(const QJsonObject& jsonObj) {
         QJsonArray edgesArray = jsonObj["edges"].toArray();
         for (const auto& edge : edgesArray) {
             if (edge.isObject()) {
-                auto node = JSONParser<GraphNode>::parse(edge.toObject());
-                edges.push_back(node);
+                //auto node = JSONParser<GraphNode>::parse(edge.toObject());
+                //edges.push_back(node);
             }
         }
     }
@@ -104,18 +107,18 @@ void GraphNode::copyData(const GraphNode& other) {
     }
 }
 
-// Template specialization for GraphNode
-template<>
-std::shared_ptr<GraphNode> JSONParser<GraphNode>::parse(const QJsonObject& jsonObj) {
-    auto node = std::make_shared<GraphNode>();
-    node->fromJSON(jsonObj);
-    return node;
-}
 
-template<typename T>
-std::shared_ptr<T> JSONParser<T>::parse(const QJsonObject& jsonObj) {
-    static_assert(sizeof(T) == 0, "Template specialization not provided for this type");
-}
+// template<>
+// std::shared_ptr<GraphNode> JSONParser<GraphNode>::parse(const QJsonObject& jsonObj) {
+//     auto node = std::make_shared<GraphNode>();
+//     node->fromJSON(jsonObj);
+//     return node;
+// }
+
+// template<typename T>
+// std::shared_ptr<T> JSONParser<T>::parse(const QJsonObject& jsonObj) {
+//     static_assert(sizeof(T) == 0, "Template specialization not provided for this type");
+// }
 
 // Define the operator<< outside the class definition, but in the same namespace
 namespace GraphParser {

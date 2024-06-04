@@ -9,8 +9,9 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     counter = 0;
+    changeLogText(zorkUL.getLastOutput());
 }
-
+//destructor
 MainWindow::~MainWindow()
 {
     delete ui;

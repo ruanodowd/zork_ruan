@@ -1,12 +1,16 @@
 #include "item.h"
 #include "output.h"
-Item::Item (string inDescription, int inWeightGrams, float inValue/**, int weaponCheck*/) {
-	description = inDescription;
-	setWeight(inWeightGrams);
-	value = inValue;
-	/**weaponCheck(isWeapon);*/
+Item::Item (string inDescription, int inWeightGrams, float inValue) {
+    description = inDescription;
+    setWeight(inWeightGrams);
+    value = inValue;
 }
-
+Item::Item (string inDescription, int inWeightGrams, float inValue, int isTicket) {
+    description = inDescription;
+    setWeight(inWeightGrams);
+    value = inValue;
+    ticketBool = isTicket;
+}
 Item::Item(string inDescription) {
 	description = inDescription;
 }
@@ -29,13 +33,6 @@ void Item::setValue(float inValue)
 	   value = inValue;
 }
 
-/**void Item::setWeaponCheck(int isWeapon)
-{
-    if(isWeapon > 0 || isWeapon < 0)
-        output.takeInput("Item not a weapon") ;
-    else
-        output.takeInput("Item is a weapon") ;
-}*/
 
 string Item::getShortDescription()
 {
